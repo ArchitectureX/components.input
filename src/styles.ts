@@ -3,6 +3,8 @@ import cx from '@architecturex/utils.cx'
 export const styles = {
   wrapper: 'mb-4',
   label: 'block text-sm font-medium text-gray-600 dark:text-gray-400',
+  inputGroup: 'relative',
+  eyeIcon: 'absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5',
   input: 'mt-1 p-2 w-full text-sm border outline-none focus:ring focus:ring-gray-300 dark:bg-black dark:text-white dark:border-gray-700',
   disabled: 'opacity-50 cursor-not-allowed',
   fullWidth: 'w-full block',
