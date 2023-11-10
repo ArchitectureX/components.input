@@ -3,16 +3,19 @@ import cx from '@architecturex/utils.cx'
 import { styles } from './styles'
 
 const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-    <circle cx="12" cy="12" r="3" />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+    <circle cx="12" cy="12" r="3"/>
   </svg>
 )
 
 const EyeOffIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
-    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-    <line x1="1" y1="1" x2="23" y2="23" />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17.5 6.5c2.5 1.5 4.5 4 4.5 5.5s-2 4-4.5 5.5"/>
+    <path d="M2 2l20 20"/>
+    <path d="M1 12s4-8 11-8c2.5 0 4.7.8 6.5 2.2"/>
+    <path d="M9.9 4.88C7.8 6.05 6 8.55 6 12"/>
+    <circle cx="12" cy="12" r="3"/>
   </svg>
 )
 
