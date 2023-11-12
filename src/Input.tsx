@@ -108,6 +108,10 @@ const Input: FC<Props> = ({
             onChange={handlePhoneChange}
             className={styles.phone}
             disabled={disabled}
+            style={{
+              height: '38px',
+              marginTop: '4px'
+            }}
           >
             {Object.entries(countryCodes).map(([code]) => (
               <option key={code} value={code}>{code}</option>
