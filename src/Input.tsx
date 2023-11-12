@@ -40,7 +40,9 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   label?: string
   fullWidth?: boolean
   error?: boolean
-  countryCodes?: { [code: string]: string };
+  countryCodes?: { [code: string]: string }
+  countryCodeValue?: string
+  onCountryCodeChange?: (e: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const Input: FC<Props> = ({
@@ -53,44 +55,27 @@ const Input: FC<Props> = ({
   type = 'text',
   value = '',
   countryCodes = { '+1': 'USA', '+52': 'Mexico' },
+  onChange,
+  onCountryCodeChange,
+  countryCodeValue = '+1',
   ...restProps
 }) => {
   const [hasFocus, setHasFocus] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [phone, setPhone] = useState({ countryCode: '+1', number: '' })
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
 
-  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setPhone({ ...phone, [e.target.name]: e.target.value })
-
-    if (restProps.onChange) {
-      restProps.onChange(e as any)
+  const handlePhoneInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e)
     }
   }
 
-  const handleCompositeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPhone({ ...phone, [e.target.name]: e.target.value })
-
-    if (restProps.onChange) {
-      const newEvent = {
-        ...e,
-        target: {
-          ...e.target,
-          name: e.target.name,
-          value: phone.countryCode + e.target.value
-        }
-      }
-
-      restProps.onChange(newEvent as any)
-    }
-  };
-
   const isPasswordType = type === 'password'
   const inputType = isPasswordType && showPassword ? 'text' : type
-  const isPhoneType = type === 'phone';
+  const isPhoneType = type === 'phone'
 
   return (
     <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)} style={error ? { border: '1px solid red' } : {}}>
@@ -104,8 +89,8 @@ const Input: FC<Props> = ({
           <select
             id={`${name}CountryCode`}
             name="countryCode"
-            value={phone.countryCode}
-            onChange={handlePhoneChange}
+            value={countryCodeValue}
+            onChange={onCountryCodeChange}
             className={styles.phone}
             disabled={disabled}
             style={{
@@ -133,8 +118,8 @@ const Input: FC<Props> = ({
           type={isPhoneType ? 'tel' : inputType}
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
-          onChange={isPhoneType ? handleCompositeChange : restProps.onChange}
-          value={isPhoneType ? phone.number : value}
+          onChange={isPhoneType ? handlePhoneInputChange : onChange}
+          value={value}
           disabled={disabled}
           {...(isPhoneType ? {} : restProps)}
         />
