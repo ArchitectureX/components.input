@@ -105,7 +105,7 @@ const Input: FC<Props> = ({
         )}
         <input
           autoComplete="new-password"
-          name={isPhoneType ? 'phone' : name}
+          name={name}
           className={
             cx.join(
               styles.input, disabled ? styles.disabled : null,
