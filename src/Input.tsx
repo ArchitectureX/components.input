@@ -106,7 +106,7 @@ const Input: FC<Props> = ({
             name="countryCode"
             value={phone.countryCode}
             onChange={handlePhoneChange}
-            className="shadow block appearance-none w-20 border border-r-0 border-gray-300 rounded-l py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={styles.phone}
             disabled={disabled}
           >
             {Object.entries(countryCodes).map(([code]) => (
