@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, FC, useState } from 'react'
+import React, { ComponentPropsWithoutRef, FC, useState, ChangeEvent } from 'react'
 import cx from '@architecturex/utils.cx'
 import { styles } from './styles'
 
@@ -40,6 +40,7 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   label?: string
   fullWidth?: boolean
   error?: boolean
+  countryCodes?: { [code: string]: string };
 }
 
 const Input: FC<Props> = ({
@@ -51,17 +52,45 @@ const Input: FC<Props> = ({
   label = '',
   type = 'text',
   value = '',
+  countryCodes = { '+1': 'USA', '+52': 'Mexico' },
   ...restProps
 }) => {
   const [hasFocus, setHasFocus] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [phone, setPhone] = useState({ countryCode: '+1', number: '' })
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
 
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setPhone({ ...phone, [e.target.name]: e.target.value })
+
+    if (restProps.onChange) {
+      restProps.onChange(e as any)
+    }
+  }
+
+  const handleCompositeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPhone({ ...phone, [e.target.name]: e.target.value })
+
+    if (restProps.onChange) {
+      const newEvent = {
+        ...e,
+        target: {
+          ...e.target,
+          name: e.target.name,
+          value: phone.countryCode + e.target.value
+        }
+      }
+
+      restProps.onChange(newEvent as any)
+    }
+  };
+
   const isPasswordType = type === 'password'
   const inputType = isPasswordType && showPassword ? 'text' : type
+  const isPhoneType = type === 'phone';
 
   return (
     <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)} style={error ? { border: '1px solid red' } : {}}>
@@ -71,23 +100,39 @@ const Input: FC<Props> = ({
         </label>
       )}
       <div className={styles.inputGroup}>
+        {isPhoneType && (
+          <select
+            id={`${name}CountryCode`}
+            name="countryCode"
+            value={phone.countryCode}
+            onChange={handlePhoneChange}
+            className="shadow block appearance-none w-20 border border-r-0 border-gray-300 rounded-l py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            disabled={disabled}
+          >
+            {Object.entries(countryCodes).map(([code]) => (
+              <option key={code} value={code}>{code}</option>
+            ))}
+          </select>
+        )}
         <input
           autoComplete="new-password"
-          name={name}
+          name={isPhoneType ? 'phone' : name}
           className={
             cx.join(
               styles.input, disabled ? styles.disabled : null,
               fullWidth ? styles.fullWidth : null,
               hasFocus ? styles.focus : null,
-              className
+              className,
+              isPhoneType ? 'rounded-r' : 'rounded'
             )
           }
-          type={inputType}
+          type={isPhoneType ? 'tel' : inputType}
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
-          value={value}
+          onChange={isPhoneType ? handleCompositeChange : restProps.onChange}
+          value={isPhoneType ? phone.number : value}
           disabled={disabled}
-          {...restProps}
+          {...(isPhoneType ? {} : restProps)}
         />
         {isPasswordType && (
           <button
