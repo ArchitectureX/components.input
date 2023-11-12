@@ -121,7 +121,7 @@ const Input: FC<Props> = ({
           onChange={isPhoneType ? handlePhoneInputChange : onChange}
           value={value}
           disabled={disabled}
-          {...(isPhoneType ? {} : restProps)}
+          {...restProps}
         />
         {isPasswordType && (
           <button
