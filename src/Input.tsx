@@ -91,7 +91,7 @@ const Input: FC<Props> = ({
             name="countryCode"
             value={countryCodeValue}
             onChange={onCountryCodeChange}
-            className={styles.phone}
+            className={cx.join(styles.phone, className)}
             disabled={disabled}
             style={{
               height: '38px',
