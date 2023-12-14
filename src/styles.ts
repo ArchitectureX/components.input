@@ -9,7 +9,7 @@ export const styles = {
   disabled: 'opacity-50 cursor-not-allowed',
   fullWidth: 'w-full block',
   focus: 'focus:outline-none focus:ring focus:ring-pacific',
-  phone: 'block appearance-none w-20 border border-r-0 border-gray-300 rounded-l py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-black dark:text-white dark:border-gray-700'
+  phone: 'h-12 rounded-lg shadow-lg focus:outline-none focus:ring focus:ring-pacific dark:bg-gray-800 dark:border-gray-600 dark:text-white'
 }
 
 export const tailwindClasses = cx.extract(styles)

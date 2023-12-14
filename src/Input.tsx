@@ -94,8 +94,10 @@ const Input: FC<Props> = ({
             className={cx.join(styles.phone, className)}
             disabled={disabled}
             style={{
-              height: '38px',
-              marginTop: '4px'
+              height: '45px',
+              marginTop: '4px',
+              marginRight: '10px',
+              width: '70px',
             }}
           >
             {Object.entries(countryCodes).map(([code]) => (
