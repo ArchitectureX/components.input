@@ -5,7 +5,7 @@ export const styles = {
   label: 'block text-sm font-medium text-gray-600 dark:text-gray-400',
   inputGroup: 'flex relative',
   eyeIcon: 'absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5',
-  input: 'mt-1 p-2 w-full text-sm border outline-none focus:ring focus:ring-gray-300 dark:bg-black dark:text-white dark:border-gray-700',
+  input: 'h-12 rounded-lg border border-pacific indent-4 shadow-lg focus:outline-none focus:ring focus:ring-pacific dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white',
   disabled: 'opacity-50 cursor-not-allowed',
   fullWidth: 'w-full block',
   focus: 'ring-2 ring-offset-2 ring-offset-gray-100 dark:ring-offset-black ring-gray-300 dark:ring-gray-700',
