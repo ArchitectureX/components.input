@@ -70,7 +70,7 @@ const Input: FC<Props> = ({
   return (
     <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)} style={error ? { border: '1px solid red' } : {}}>
       {label && (
-        <label className={styles.label}>
+        <label className={styles.label} htmlFor={name}>
           {label}
         </label>
       )}
