@@ -68,7 +68,7 @@ const Input: FC<Props> = ({
   const inputType = isPasswordType && showPassword ? 'text' : type
 
   return (
-    <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)} style={error ? { border: '1px solid red' } : {}}>
+    <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)}>
       {label && (
         <label className={styles.label} htmlFor={name}>
           {label}
@@ -92,6 +92,7 @@ const Input: FC<Props> = ({
           onChange={onChange}
           value={value}
           disabled={disabled}
+          style={error ? { border: '1px solid red' } : restProps.style}
           {...restProps}
         />
         {isPasswordType && (
