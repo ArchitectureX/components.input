@@ -59,6 +59,7 @@ const Input: FC<Props> = ({
   onChange,
   ...restProps
 }) => {
+  const hasError = error || errorText
   const [hasFocus, setHasFocus] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -94,7 +95,7 @@ const Input: FC<Props> = ({
           onChange={onChange}
           value={value}
           disabled={disabled}
-          style={error ? { border: '1px solid red' } : restProps.style}
+          style={hasError ? { border: '1px solid red' } : restProps.style}
           {...restProps}
         />
         {isPasswordType && (
@@ -111,7 +112,7 @@ const Input: FC<Props> = ({
         )}
       </div>
 
-      {error && <div className={styles.errorText}>{errorText}</div>}
+      {errorText && <div className={styles.errorText}>{errorText}</div>}
     </div>
   )
 }
