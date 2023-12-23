@@ -40,6 +40,7 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   label?: string
   fullWidth?: boolean
   error?: boolean
+  errorText?: string
   countryCodes?: { [code: string]: string }
   countryCodeValue?: string
   onCountryCodeChange?: (e: ChangeEvent<HTMLSelectElement>) => void
@@ -49,6 +50,7 @@ const Input: FC<Props> = ({
   className = '',
   disabled = false,
   error = false,
+  errorText = '',
   fullWidth = false,
   name = '',
   label = '',
@@ -107,6 +109,8 @@ const Input: FC<Props> = ({
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
         )}
+
+        {error && <div className={styles.errorText}>{errorText}</div>}
       </div>
     </div>
   )
