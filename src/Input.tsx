@@ -109,9 +109,9 @@ const Input: FC<Props> = ({
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
         )}
-
-        {error && <div className={styles.errorText}>{errorText}</div>}
       </div>
+
+      {error && <div className={styles.errorText}>{errorText}</div>}
     </div>
   )
 }
