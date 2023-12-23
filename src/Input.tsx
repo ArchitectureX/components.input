@@ -54,10 +54,7 @@ const Input: FC<Props> = ({
   label = '',
   type = 'text',
   value = '',
-  countryCodes = { '+1': 'USA', '+52': 'Mexico' },
   onChange,
-  onCountryCodeChange,
-  countryCodeValue = '+1',
   ...restProps
 }) => {
   const [hasFocus, setHasFocus] = useState(false)
@@ -67,15 +64,8 @@ const Input: FC<Props> = ({
     setShowPassword(!showPassword)
   }
 
-  const handlePhoneInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(e)
-    }
-  }
-
   const isPasswordType = type === 'password'
   const inputType = isPasswordType && showPassword ? 'text' : type
-  const isPhoneType = type === 'phone'
 
   return (
     <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)} style={error ? { border: '1px solid red' } : {}}>
@@ -85,25 +75,6 @@ const Input: FC<Props> = ({
         </label>
       )}
       <div className={styles.inputGroup}>
-        {isPhoneType && (
-          <select
-            id={`${name}CountryCode`}
-            name="countryCode"
-            value={countryCodeValue}
-            onChange={onCountryCodeChange}
-            className={cx.join(styles.phone, className)}
-            disabled={disabled}
-            style={{
-              height: '48px',
-              marginRight: '10px',
-              width: '80px',
-            }}
-          >
-            {Object.entries(countryCodes).map(([code]) => (
-              <option key={code} value={code}>{code}</option>
-            ))}
-          </select>
-        )}
         <input
           autoComplete="new-password"
           name={name}
@@ -112,14 +83,13 @@ const Input: FC<Props> = ({
               styles.input, disabled ? styles.disabled : null,
               fullWidth ? styles.fullWidth : null,
               hasFocus ? styles.focus : null,
-              className,
-              isPhoneType ? 'rounded-r' : 'rounded'
+              className
             )
           }
-          type={isPhoneType ? 'tel' : inputType}
+          type={inputType}
           onFocus={() => setHasFocus(true)}
           onBlur={() => setHasFocus(false)}
-          onChange={isPhoneType ? handlePhoneInputChange : onChange}
+          onChange={onChange}
           value={value}
           disabled={disabled}
           {...restProps}
