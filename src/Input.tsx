@@ -105,7 +105,7 @@ const Input: FC<Props> = ({
             onClick={togglePasswordVisibility}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             title={showPassword ? 'Hide password' : 'Show password'}
-            style={{ top: '5px' }}
+            style={{ top: '3px' }}
           >
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
