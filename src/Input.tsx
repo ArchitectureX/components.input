@@ -1,6 +1,6 @@
+export default () => `
 import React, { ComponentPropsWithoutRef, FC, useState, ChangeEvent } from 'react'
 import cx from '@architecturex/utils.cx'
-import { styles } from './styles'
 
 const EyeIcon = () => (
   <svg
@@ -71,21 +71,22 @@ const Input: FC<Props> = ({
   const inputType = isPasswordType && showPassword ? 'text' : type
 
   return (
-    <div data-component="Input" className={cx.join(styles.wrapper, fullWidth ? styles.fullWidth : null)}>
+    <div data-component="Input" className={cx.join('p-4 text-left', fullWidth ? 'w-full block' : null)}>
       {label && (
-        <label className={styles.label} htmlFor={name}>
+        <label className="block text-gray-700 text-sm font-bold mb-2 text-left dark:text-gray-300" htmlFor={name}>
           {label}
         </label>
       )}
-      <div className={styles.inputGroup}>
+      <div className="flex relative">
         <input
           autoComplete="new-password"
           name={name}
           className={
             cx.join(
-              styles.input, disabled ? styles.disabled : null,
-              fullWidth ? styles.fullWidth : null,
-              hasFocus ? styles.focus : null,
+              'w-full border p-2 border-gray-300 bg-white rounded text-black dark:border-gray-600 dark:bg-gray-700 dark:text-white',
+              disabled ? 'opacity-50 cursor-not-allowed' : null,
+              fullWidth ? 'w-full block' : null,
+              hasFocus ? 'focus:outline-none focus:ring focus:ring-pacific' : null,
               className
             )
           }
@@ -101,7 +102,7 @@ const Input: FC<Props> = ({
         {isPasswordType && (
           <button
             type="button"
-            className={styles.eyeIcon}
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
             onClick={togglePasswordVisibility}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             title={showPassword ? 'Hide password' : 'Show password'}
@@ -112,9 +113,10 @@ const Input: FC<Props> = ({
         )}
       </div>
 
-      {errorText && <div className={styles.errorText}>{errorText}</div>}
+      {errorText && <div className="text-red-500 text-xs">{errorText}</div>}
     </div>
   )
 }
 
 export default Input
+`
